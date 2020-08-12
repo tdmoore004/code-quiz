@@ -4,20 +4,22 @@ html {
     height: 100%;
 }
 
+/* Styles for headers in the navbar */
 h1, h2 {
-    font-size: 25px;
+    font-size: 20px;
 }
 
+/* Styles for page content (start, questions and high score) */
 h3 {
     font-size: 35px;
 }
 
-li, p {
-    font-size: 20px;
-}
-
 h3.start-header {
     text-align: center;
+}
+
+li, p {
+    font-size: 20px;
 }
 
 p.start-header {
@@ -26,6 +28,11 @@ p.start-header {
 
 main.container.mx-auto.mt-5.bg-white.col-12.col-md-10.col-lg-8.col-xl-6 {
     max-height: 400px;
+}
+
+section.mx-auto.col-12.col-md-10.col-lg-8.col-xl-6 {
+    max-width: 600px;
+    min-width: 350px;
 }
 
 footer.container.mt-auto.border-top.border-primary.mx-auto {
