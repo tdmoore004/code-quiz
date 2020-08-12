@@ -1,0 +1,39 @@
+/* General Page Styles */
+/* Setting page height to keep footer at bottom. */
+html {
+    height: 100%;
+}
+
+h1, h2 {
+    font-size: 25px;
+}
+
+h3 {
+    font-size: 35px;
+}
+
+li, p {
+    font-size: 20px;
+}
+
+h3.start-header {
+    text-align: center;
+}
+
+p.start-header {
+    text-align: center;
+}
+
+main.container.mx-auto.mt-5.bg-white.col-12.col-md-10.col-lg-8.col-xl-6 {
+    max-height: 400px;
+}
+
+footer.container.mt-auto.border-top.border-primary.mx-auto {
+    width: 260px;
+}
+
+footer.container img.bg-transparent.mb-4.mt-2.text-muted {
+    height: 12px;
+    width: 230px;
+    opacity: 75%;
+}
