@@ -10,6 +10,7 @@ const questionButton = document.querySelector(".question-button");
 const scoreTime = document.querySelector(".score-time");
 const initialInput = document.querySelector("#highscore-initials");
 const scoreSubmit = document.querySelector("#highscore-submit");
+let allScores = [];
 
 let totalSeconds = 60
 let secondsElapsed = 0
@@ -19,13 +20,7 @@ function getFormattedMinutes() {
 
     var secondsLeft = totalSeconds - secondsElapsed;
     var minutesLeft = Math.floor(secondsLeft / 60);
-    var formattedMinutes;
-
-    if (minutesLeft < 10) {
-        formattedMinutes = "0" + minutesLeft;
-    } else {
-        formattedMinutes = minutesLeft;
-    }
+    var formattedMinutes = minutesLeft;
 
     return formattedMinutes;
 }
@@ -53,7 +48,7 @@ function setTime() {
         clearInterval(interval);
     }
 
-    scoreTime.textContent = "Your final score is " + getFormattedSeconds() + ".";
+    scoreTime.textContent = getFormattedSeconds();
 }
 
 // Function for starting quiz.
@@ -97,6 +92,8 @@ function questions(event) {
 
                     setTime();
 
+        } else if (event.target.parentElement.id === "complete") {
+            return
         } else {
             document.querySelector("#" + event.target.parentElement.id).style.display = "none";
             document.querySelector("#" + event.path[1].nextElementSibling.id).style.display = "";
@@ -104,6 +101,22 @@ function questions(event) {
     }
 }
 
+function submitScore() {
+    console.log(initialInput.value + " - " + scoreTime.textContent);
+    let highScores = JSON.parse(localStorage.getItem("allScores"));
+    if (highScores == null) allScores = [];
+    let scoreInitials = initialInput.value;
+    let finalScore = scoreTime.textContent;
+    let scoreEntry = {
+        "initials": scoreInitials,
+        "score": finalScore
+    };
+    localStorage.setItem("scoreEntry", JSON.stringify(scoreEntry));
+    allScores.push(scoreEntry);
+    localStorage.setItem("allScores", JSON.stringify(allScores));
+}
+
 // Event listeners.
 startButton.addEventListener("click", startQuiz);
 questionButton.addEventListener("click", questions);
+scoreSubmit.addEventListener("click", submitScore);
