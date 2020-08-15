@@ -10,6 +10,8 @@ const questionButton = document.querySelector(".question-button");
 const scoreTime = document.querySelector(".score-time");
 const initialInput = document.querySelector("#highscore-initials");
 const scoreSubmit = document.querySelector("#highscore-submit");
+const clearScores = document.querySelector("#clear-scores");
+const tryAgain = document.querySelector("#try-again");
 
 let totalSeconds = 60
 let secondsElapsed = 0
@@ -41,7 +43,7 @@ function getFormattedSeconds() {
 
 // Function for setting time.
 function setTime() {
-    timeDisplay.textContent = getFormattedMinutes() + ":" + getFormattedSeconds();
+    timeDisplay.textContent = "0" + getFormattedMinutes() + ":" + getFormattedSeconds();
 
     if (secondsElapsed >= totalSeconds) {
         clearInterval(interval);
@@ -102,10 +104,9 @@ function questions(event) {
 
 // Function for saving score to local storage and pulling into High Scores.
 function submitScore() {
-    console.log(JSON.parse(localStorage.getItem("allScores")))
     let allScores = JSON.parse(localStorage.getItem("allScores"));
     if (!allScores) allScores = [];
-    
+
     let scoreInitials = initialInput.value;
     let finalScore = scoreTime.textContent;
     let scoreEntry = {
@@ -125,12 +126,39 @@ function submitScore() {
         let scoreListItem = document.createElement("li");
         scoreListItem.textContent = allScores[i].initials + " - " + allScores[i].score;
         document.querySelector("#scores-list").prepend(scoreListItem);
-
     }
-    
 }
+
+function clearHighScores() {
+    localStorage.setItem("allScores", null);
+    document.querySelector("#scores-list").innerHTML = ""
+}
+
+function startOver() {
+    document.querySelector("#high-scores").style.display = "none";
+    for (i = 0; i < document.querySelectorAll(".after-start").length; i++) {
+        document.querySelectorAll(".after-start")[i].style.display = "none";
+    }
+    startSection.style.display = "";
+    clearInterval(interval);
+    secondsElapsed = 0;
+    initialInput.value = null
+    setTime();
+}
+
+function showHighScores() {
+    for (i = 0; i < document.querySelectorAll(".before-highscore ").length; i++) {
+        document.querySelectorAll(".before-highscore ")[i].style.display = "none";
+    }
+    document.querySelector("#high-scores").style.display = "";
+}
+
 
 // Event listeners.
 startButton.addEventListener("click", startQuiz);
 questionButton.addEventListener("click", questions);
 scoreSubmit.addEventListener("click", submitScore);
+clearScores.addEventListener("click", clearHighScores);
+tryAgain.addEventListener("click", startOver);
+codeQuizHead.addEventListener("click", startOver);
+highScoreHead.addEventListener("click", showHighScores);

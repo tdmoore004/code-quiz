@@ -18,6 +18,10 @@ h3.start-header {
     text-align: center;
 }
 
+h1.code-quiz-header.nav-link:hover, h2.high-score-header.nav-link:hover {
+    color: #007bff;
+}
+
 li, p {
     font-size: 20px;
 }
