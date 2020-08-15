@@ -18,7 +18,7 @@ h3.start-header {
     text-align: center;
 }
 
-h1.code-quiz-header.nav-link:hover, h2.high-score-header.nav-link:hover {
+h1.code-quiz-header:hover, h2.high-score-header:hover {
     color: #007bff;
 }
 

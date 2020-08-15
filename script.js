@@ -12,6 +12,7 @@ const initialInput = document.querySelector("#highscore-initials");
 const scoreSubmit = document.querySelector("#highscore-submit");
 const clearScores = document.querySelector("#clear-scores");
 const tryAgain = document.querySelector("#try-again");
+const submitScoreForm = document.querySelector("#submit-score");
 
 let totalSeconds = 60
 let secondsElapsed = 0
@@ -93,7 +94,7 @@ function questions(event) {
 
                     setTime();
 
-        } else if (event.target.parentElement.id === "complete") {
+        } else if (event.target.parentElement.id === "submit-score") {
             return
         } else {
             document.querySelector("#" + event.target.parentElement.id).style.display = "none";
@@ -103,7 +104,8 @@ function questions(event) {
 }
 
 // Function for saving score to local storage and pulling into High Scores.
-function submitScore() {
+function submitScore(event) {
+    event.preventDefault();
     let allScores = JSON.parse(localStorage.getItem("allScores"));
     if (!allScores) allScores = [];
 
@@ -116,24 +118,30 @@ function submitScore() {
 
     localStorage.setItem("scoreEntry", JSON.stringify(scoreEntry));
     allScores.push(scoreEntry);
+    allScores.sort(function(a, b) {
+        return (b.score - a.score);
+    })
     localStorage.setItem("allScores", JSON.stringify(allScores));
 
     document.querySelector("#complete").style.display = "none";
     document.querySelector("#high-scores").style.display = "";
 
+    document.querySelector("#scores-list").innerHTML = ""
     allScores = JSON.parse(localStorage.getItem("allScores"));
     for (i = 0; i < allScores.length; i++) {
         let scoreListItem = document.createElement("li");
         scoreListItem.textContent = allScores[i].initials + " - " + allScores[i].score;
-        document.querySelector("#scores-list").prepend(scoreListItem);
+        document.querySelector("#scores-list").appendChild(scoreListItem);
     }
 }
 
+// Function for clearing high scores.
 function clearHighScores() {
     localStorage.setItem("allScores", null);
     document.querySelector("#scores-list").innerHTML = ""
 }
 
+// Function to try again or start over.
 function startOver() {
     document.querySelector("#high-scores").style.display = "none";
     for (i = 0; i < document.querySelectorAll(".after-start").length; i++) {
@@ -146,6 +154,7 @@ function startOver() {
     setTime();
 }
 
+// Function for showing high scores from anywhere in the quiz.
 function showHighScores() {
     for (i = 0; i < document.querySelectorAll(".before-highscore ").length; i++) {
         document.querySelectorAll(".before-highscore ")[i].style.display = "none";
@@ -157,7 +166,7 @@ function showHighScores() {
 // Event listeners.
 startButton.addEventListener("click", startQuiz);
 questionButton.addEventListener("click", questions);
-scoreSubmit.addEventListener("click", submitScore);
+submitScoreForm.addEventListener("submit", submitScore);
 clearScores.addEventListener("click", clearHighScores);
 tryAgain.addEventListener("click", startOver);
 codeQuizHead.addEventListener("click", startOver);

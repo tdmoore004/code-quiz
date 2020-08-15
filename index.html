@@ -18,16 +18,18 @@
 <body class="d-flex flex-column h-100">
 
     <!-- Navbar with time remaining and link to highscores -->
-    <nav class="navbar navbar-light">
-        <h1 class="code-quiz-header nav-link">Code Quiz</h1>
+    <nav class="navbar navbar-light mt-2 mx-2">
+        <h1 class="code-quiz-header">Code Quiz</h1>
         <h2 class="time-display">01:00</h2>
-        <h2 class="high-score-header nav-link">
+        <h2 class="high-score-header">
             High Scores
         </h2>
     </nav>
 
     <!-- Questions for the quiz -->
     <main class="question-button container mx-auto my-5 bg-white col-12 col-md-10 col-lg-8 col-xl-6">
+        
+        <!-- Start Screen -->
         <section class="before-highscore mx-auto col-12 col-md-10 col-lg-8 col-xl-6" id="startsection">
             <h3 class="start-header">Challenge Your Coding Knowledge!</h3>
             <p class="mt-3 start-header">Answer the following code-related questions within the time limit. For any
@@ -35,6 +37,8 @@
                 you will be penalized 10 seconds.</p>
             <button class="btn btn-primary btn-lg mt-3 col-12" id="start-button" value="startbutton">Start Quiz</button>
         </section>
+        
+        <!-- Question 1 -->
         <section class="before-highscore after-start question mx-auto col-12 col-md-10 col-lg-8 col-xl-6" id="question1" style="display: none;">
             <h4>Question 1:</h4>
             <h4 class="ml-4">Commonly used data types do not include:</h4>
@@ -43,6 +47,8 @@
             <button class="btn btn-primary btn-lg ml-5 col-6 mt-2" value="incorrect">C. Booleans</button>
             <button class="btn btn-primary btn-lg ml-5 col-6 mt-2" value="incorrect">D. Strings</button>
         </section>
+        
+        <!-- Question 2 -->
         <section class="before-highscore after-start question mx-auto col-12 col-md-10 col-lg-8 col-xl-6" id="question2" style="display: none;">
             <h4>Question 2:</h4>
             <h4 class="ml-4">The condition in an if/else statement is enclosed within _____.</h4>
@@ -51,6 +57,8 @@
             <button class="btn btn-primary btn-lg ml-5 col-6 mt-2" value="incorrect">C. square brackets</button>
             <button class="btn btn-primary btn-lg ml-5 col-6 mt-2" value="incorrect">D. curly brackets</button>
         </section>
+        
+        <!-- Question 3 -->
         <section class="before-highscore after-start question mx-auto col-12 col-md-10 col-lg-8 col-xl-6" id="question3" style="display: none;">
             <h4>Question 3:</h4>
             <h4 class="ml-4">Arrays in JavaScript can be used to store _____.</h4>
@@ -59,6 +67,8 @@
             <button class="btn btn-primary btn-lg ml-5 col-6 mt-2" value="incorrect">C. other arrays</button>
             <button class="btn btn-primary btn-lg ml-5 col-6 mt-2" value="correct">D. all of the above</button>
         </section>
+        
+        <!-- Question 4 -->
         <section class="before-highscore after-start question mx-auto col-12 col-md-10 col-lg-8 col-xl-6" id="question4" style="display: none;">
             <h4>Question 4:</h4>
             <h4 class="ml-4">String values must be enclosed within _____ when being assigned to variables.</h4>
@@ -67,6 +77,8 @@
             <button class="btn btn-primary btn-lg ml-5 col-6 mt-2" value="incorrect">C. parentheses</button>
             <button class="btn btn-primary btn-lg ml-5 col-6 mt-2" value="incorrect">D. commas</button>
         </section>
+        
+        <!-- Question 5 -->
         <section class="before-highscore after-start question mx-auto col-12 col-md-10 col-lg-8 col-xl-6" id="question5" style="display: none;">
             <h4>Question 5:</h4>
             <h4 class="ml-4">A very useful tool used during development and debugging for printing content to inspect
@@ -76,12 +88,18 @@
             <button class="btn btn-primary btn-lg ml-5 col-6 mt-2" value="correct">C. console.log</button>
             <button class="btn btn-primary btn-lg ml-5 col-6 mt-2" value="incorrect">D. JavaScript</button>
         </section>
+        
+        <!-- Submit Score -->
         <section class="before-highscore after-start mx-auto col-12 col-md-10 col-lg-8 col-xl-6" id="complete" style="display: none;">
             <h3>Complete!</h3>
             <p>Your final score is <span class="score-time">30</span>.</p>
-            <input type="text" class="form-control" id="highscore-initials" placeholder="Enter initials to save score.">
-            <button type="submit" class="btn btn-primary mt-3" id="highscore-submit" value="submitscore">Submit</button>
+            <form id="submit-score">
+                <input type="text" class="form-control" id="highscore-initials" placeholder="Enter initials to save score.">
+                <button type="submit" class="btn btn-primary mt-3" id="highscore-submit" value="submitscore">Submit</button>
+            </form>
         </section>
+        
+        <!-- High Scores -->
         <section class="after-start mx-auto col-12 col-md-10 col-lg-8 col-xl-6" id="high-scores" style="display: none;">
             <h3>High Scores</h3>
             <ol class="mt-3" id="scores-list">
