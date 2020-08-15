@@ -26,7 +26,7 @@ p.start-header {
     text-align: center;
 }
 
-main.container.mx-auto.mt-5.bg-white.col-12.col-md-10.col-lg-8.col-xl-6 {
+main.container.mx-auto.my-5.bg-white.col-12.col-md-10.col-lg-8.col-xl-6 {
     max-height: 400px;
 }
 
