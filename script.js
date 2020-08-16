@@ -40,7 +40,7 @@ function getFormattedSeconds() {
         formattedSeconds = secondsLeft;
     };
 
-    if(secondsElapsed >= totalSeconds) {
+    if (secondsElapsed >= totalSeconds) {
         return 0;
     }
 
@@ -50,10 +50,12 @@ function getFormattedSeconds() {
 // Functionality for setting time.
 function setTime() {
     timeDisplay.textContent = "0" + getFormattedMinutes() + ":" + getFormattedSeconds();
-    
-    scoreMessage.textContent = "Your final score is " + scoreTime.textContent
-    scoreTime.textContent = getFormattedSeconds();
 
+    // Setting time at the end of quiz and providing final score.
+    scoreTime.textContent = getFormattedSeconds();
+    scoreMessage.textContent = "Your final score is " + scoreTime.textContent
+
+    // Checking if time has run out and ending quiz if it has.
     if (secondsElapsed >= totalSeconds) {
         clearInterval(interval);
         timeDisplay.textContent = "00:00";
@@ -81,15 +83,20 @@ function startQuiz(event) {
 
 // Functionality for answering and moving through questions.
 function questions(event) {
+    
+    // Checking to see if "click" event is a button click and if the answer is correct or not.
     if (event.target.value) {
         if ((event.target.value === "startbutton") || (event.target.value === "submitscore")) {
             timeDisplay.style.color = "black";
+            
+        // If answer is incorrect 10 seconds deducted and red alert on time display.
         } else if (event.target.value === "incorrect") {
             secondsElapsed += 10;
             timeDisplay.style.color = "red";
             setTimeout(function () {
                 timeDisplay.style.color = "black";
             }, 2000);
+        // If answer is correct no time deducted and green alert on time display. 
         } else {
             timeDisplay.style.color = "#32DC32";
             setTimeout(function () {
@@ -97,16 +104,18 @@ function questions(event) {
             }, 2000);
         };
 
+        // Conditional for if the answer is chosen on last question.
         if (event.target.parentElement.id === "question5") {
             clearInterval(interval);
             document.querySelector("#" + event.target.parentElement.id).style.display = "none";
             completeSection.style.display = "";
 
-            if (event.target.value !== "correct")
+            if (event.target.value !== "correct") {
                 secondsElapsed +=
-
                     setTime();
-
+            } else {
+                setTime();
+            }
         } else if (event.target.parentElement.id === "submit-score") {
             return
         } else {
@@ -119,9 +128,12 @@ function questions(event) {
 // Functionality for saving score and displaying to high score page.
 function submitScore(event) {
     event.preventDefault();
+
+    // Pull list of high scores that are already stored in local storage.
     let allScores = JSON.parse(localStorage.getItem("allScores"));
     if (!allScores) allScores = [];
 
+    // Pull new score to add to high score list.
     let scoreInitials = initialInput.value;
     let finalScore = scoreTime.textContent;
     let scoreEntry = {
@@ -129,22 +141,25 @@ function submitScore(event) {
         "score": finalScore
     };
 
+    // Add new high score list to local storage and sort list order.
     localStorage.setItem("scoreEntry", JSON.stringify(scoreEntry));
     allScores.push(scoreEntry);
-    allScores.sort(function(a, b) {
-        return (b.score - a.score);
+    allScores.sort(function (a, b) {
+        return (a.score - b.score);
     });
     localStorage.setItem("allScores", JSON.stringify(allScores));
 
+    // Display high scores.
     document.querySelector("#complete").style.display = "none";
     document.querySelector("#high-scores").style.display = "";
 
+    // Display high scores list.
     document.querySelector("#scores-list").innerHTML = ""
     allScores = JSON.parse(localStorage.getItem("allScores"));
     for (i = 0; i < allScores.length; i++) {
         let scoreListItem = document.createElement("li");
         scoreListItem.textContent = allScores[i].initials + " - " + allScores[i].score;
-        document.querySelector("#scores-list").appendChild(scoreListItem);
+        document.querySelector("#scores-list").prepend(scoreListItem);
     };
 };
 

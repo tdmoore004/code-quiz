@@ -30,15 +30,12 @@ p.start-header {
     text-align: center;
 }
 
-main.container.mx-auto.my-5.bg-white.col-12.col-md-10.col-lg-8.col-xl-6 {
-    max-height: 400px;
-}
-
 section.mx-auto.col-12.col-md-10.col-lg-8.col-xl-6 {
     max-width: 600px;
     min-width: 350px;
 }
 
+/* Styles for footer */
 footer.container.mt-auto.border-top.border-primary.mx-auto {
     width: 260px;
 }
