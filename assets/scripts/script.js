@@ -83,7 +83,7 @@ function startQuiz(event) {
 
 // Functionality for answering and moving through questions.
 function questions(event) {
-    
+    console.log(event);
     // Checking to see if "click" event is a button click and if the answer is correct or not.
     if (event.target.value) {
         if ((event.target.value === "startbutton") || (event.target.value === "submitscore")) {
@@ -120,7 +120,7 @@ function questions(event) {
             return
         } else {
             document.querySelector("#" + event.target.parentElement.id).style.display = "none";
-            document.querySelector("#" + event.path[1].nextElementSibling.id).style.display = "";
+            document.querySelector("#" + event.target.parentElement.nextElementSibling.id).style.display = "";
         };
     };
 };
