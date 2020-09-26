@@ -21,9 +21,9 @@ let secondsElapsed = 0;
 // Functionality for formatting the minutes.
 function getFormattedMinutes() {
 
-    var secondsLeft = totalSeconds - secondsElapsed;
-    var minutesLeft = Math.floor(secondsLeft / 60);
-    var formattedMinutes = minutesLeft;
+    let secondsLeft = totalSeconds - secondsElapsed;
+    let minutesLeft = Math.floor(secondsLeft / 60);
+    let formattedMinutes = minutesLeft;
 
     return formattedMinutes;
 };
@@ -31,8 +31,8 @@ function getFormattedMinutes() {
 // Functionality for formatting the seconds.
 function getFormattedSeconds() {
 
-    var secondsLeft = (totalSeconds - secondsElapsed) % 60;
-    var formattedSeconds;
+    let secondsLeft = (totalSeconds - secondsElapsed) % 60;
+    let formattedSeconds;
 
     if (secondsLeft < 10) {
         formattedSeconds = "0" + secondsLeft;
